@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy my ebook - instant digital download">
+    <title>Buy My Ebook • Simple & Secure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --tw-color-primary: #10b981;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .book-cover {
+            box-shadow: 25px 25px 0 -10px rgb(16 185 129);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .book-cover:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 35px 35px 0 -10px rgb(16 185 129);
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #10b981;
+            bottom: -6px;
+            left: 0;
+        }
+
+        /* Custom class for clean justified text */
+        .justify-text {
+            text-align: justify;
+            hyphens: auto;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 text-xl font-semibold">
+                <span class="text-3xl">⚖️</span>
+                <span>VIVEK TANWAR, ADVOCATE</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="hover:text-emerald-600 transition-colors">Home</a>
+                <a href="ebook.html" class="text-emerald-600 font-semibold">Ebook</a>
+                <a href="https://www.youtube.com" target="_blank" class="hover:text-emerald-600 transition-colors">YouTube Channel</a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-2 text-xs bg-slate-100 text-slate-600 px-4 py-2 rounded-2xl">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                SECURE CHECKOUT
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-bg py-16 md:py-24 overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            
+            <div class="w-full md:w-1/2 space-y-8">
+                <div class="inline-flex items-center gap-2 bg-white text-emerald-700 text-sm font-medium px-6 py-3 rounded-3xl border border-emerald-200 shadow-sm">
+                    <span>✅ Instant Digital Download</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl leading-tight font-bold heading-font">
+                    HOW TO DRAFT A LEGAL NOTICE AFTER DISHONOUR OF CHEQUE
+                </h1>
+                
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    "The complete guide to drafting a legal notice that will save your time and provide strict guidelines to draft properly."
+                </p>
+                
+                <div class="flex items-center gap-4">
+                    <div>
+                        <span class="text-5xl font-semibold text-slate-900">Rs.49/-</span>
+                        <span class="text-slate-400 text-lg line-through ml-3">Rs.199/-</span>
+                    </div>
+                    <div class="text-emerald-600 text-sm font-medium leading-tight">
+                        ONE-TIME PAYMENT<br>
+                        <span class="text-xs bg-emerald-100 px-3 py-1 rounded-full mt-1 inline-block">Save your time</span>
+                    </div>
+                </div>
+                
+                <a id="buy-button"
+                   href="YOUR_GUMROAD_OR_STRIPE_LINK_HERE"
+                   target="_blank"
+                   class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white text-xl font-semibold px-10 py-6 rounded-3xl transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:-translate-y-0.5 w-full md:w-auto">
+                    <span>Buy Now – Instant Access</span>
+                    <span class="ml-4 text-2xl">→</span>
+                </a>
+                
+                <div class="flex items-center gap-4 text-sm mt-4">
+                    <div class="flex -space-x-3">
+                        <div class="w-8 h-8 bg-slate-200 border-2 border-white rounded-full"></div>
+                        <div class="w-8 h-8 bg-emerald-200 border-2 border-white rounded-full"></div>
+                        <div class="w-8 h-8 bg-amber-200 border-2 border-white rounded-full"></div>
+                    </div>
+                    <p class="text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded font-medium">🔒 Secure checkout</span>
+                        <span>• PDF delivered instantly</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2 flex justify-center md:justify-end mt-12 md:mt-0 relative">
+                <div class="relative z-10">
+                    <img src="ebook1.jpg" 
+                         alt="How to Draft legal notice after dishonour of cheque - Cover"
+                         class="book-cover w-full max-w-[320px] md:max-w-[380px] rounded-3xl border-8 border-white bg-white">
+                    
+                    <div class="absolute -top-6 -right-6 bg-white text-emerald-600 text-sm font-bold px-6 py-3 rounded-full shadow-xl flex items-center gap-2 border border-slate-100 z-20">
+                        <span class="text-xl">📥</span>
+                        INSTANT DOWNLOAD
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="bg-white py-20 border-t border-b">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="section-header text-3xl font-bold mb-10 text-slate-900 heading-font">About the Ebook</h2>
+            
+            <div class="prose prose-slate prose-lg max-w-none text-slate-700 justify-text space-y-6">
+                <p>
+                    This ebook serves as a practical guide for individuals dealing with a cheque bounce (dishonour of a cheque), specifically focusing on the legal procedures required under <strong>Section 138 of the Negotiable Instruments Act, 1881</strong>. It is designed to simplify the law and provide a step-by-step process for drafting and sending a formal legal notice.
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">1. Understanding Cheque Bounce</h3>
+                <p>A cheque bounce occurs when a bank returns a cheque unpaid. Common reasons include:</p>
+                <ul class="list-disc pl-6 space-y-2 marker:text-emerald-500">
+                    <li><strong>Funds Insufficient:</strong> Lack of enough money in the account.</li>
+                    <li><strong>Account Blocked/Closed:</strong> The account is inactive or restricted.</li>
+                    <li><strong>Signature Mismatch:</strong> The signature does not match bank records.</li>
+                </ul>
+                
+                <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">2. Legal Requirements and Timelines</h3>
+                <p>Before filing a court case, the law mandates giving the defaulter a final chance to pay. Two critical rules apply:</p>
+                <ul class="list-disc pl-6 space-y-2 marker:text-emerald-500">
+                    <li><strong>The 30-Day Rule:</strong> The legal notice must be sent within 30 days of receiving the "Return Memo" from the bank.</li>
+                    <li><strong>The 15-Day Warning:</strong> The notice must give the defaulter 15 days from the date of receipt to make the payment. Legal action can only proceed if they fail to pay within this window.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">3. Anatomy of a Legal Notice</h3>
+                <p>The guide breaks down the structure of a notice into 10 essential parts, including:</p>
+                <ul class="list-disc pl-6 space-y-2 marker:text-emerald-500">
+                    <li><strong>Sender Details:</strong> Advocate’s letterhead and the exact date.</li>
+                    <li><strong>Subject Line:</strong> A clear heading citing Section 138 of the N.I. Act.</li>
+                    <li><strong>The Background:</strong> Explaining the reason for the debt (e.g., a friendly loan or business transaction) and specific cheque details.</li>
+                    <li><strong>The Demand:</strong> A formal demand for the exact amount and a warning of criminal prosecution if unpaid.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">4. Practical Resources</h3>
+                <ul class="list-disc pl-6 space-y-2 marker:text-emerald-500">
+                    <li><strong>Sample Format:</strong> The ebook provides a template using a hypothetical case involving a Rs. 3,00,000/- loan to help users draft their own notice.</li>
+                    <li><strong>Delivery Advice:</strong> It emphasizes sending the notice via Registered Post (AD) or Speed Post to maintain valid proof of delivery for court purposes.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-slate-900 text-white py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8 heading-font">Ready to draft your legal notice?</h2>
+            <p class="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">Get the complete guide and standard format immediately after checkout.</p>
+            
+            <a id="buy-button-2"
+               href="YOUR_GUMROAD_OR_STRIPE_LINK_HERE"
+               target="_blank"
+               class="inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-400 text-white text-2xl font-bold px-12 py-6 rounded-full transition-all duration-300 shadow-[0_0_40px_rgba(16,185,129,0.3)] hover:shadow-[0_0_60px_rgba(16,185,129,0.5)] hover:-translate-y-1 w-full sm:w-auto">
+                Yes, I want the ebook →
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t py-12">
+        <div class="max-w-5xl mx-auto px-6 text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-medium">© 2026 Vivek Tanwar • All Rights Reserved</div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="index.html" class="hover:text-emerald-600 transition-colors">Home</a>
+                <a href="https://www.youtube.com" target="_blank" class="hover:text-emerald-600 transition-colors">YouTube</a>
+                <a href="#" class="hover:text-emerald-600 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-emerald-600 transition-colors">Terms & Conditions</a>
+            </div>
+            <div class="text-xs bg-slate-50 px-4 py-2 rounded-full border border-slate-100">Made with ❤️ for simple ebook sales</div>
+        </div>
+    </footer>
+
+    <script>
+        document.documentElement.setAttribute('data-tailwind', 'true');
+        
+        const buyButtons = document.querySelectorAll('#buy-button, #buy-button-2');
+        buyButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                console.log('%c✅ Buy button clicked – redirecting to secure checkout', 'color:#10b981; font-weight:bold');
+            });
+        });
+    </script>
+</body>
+</html>
