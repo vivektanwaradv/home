@@ -3,183 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Email & Password Auth</title>
+    <title>Account Access | Vivek Tanwar</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #eef2f5;
+            min-height: 100vh;
+            background-color: #f8fafc;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .auth-container {
             background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 350px;
-            text-align: center;
+            max-width: 400px;
         }
-        .auth-container h2 {
-            margin-top: 0;
-            color: #333;
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            color: #1e3a8a;
+            border-bottom: 2px solid #1e3a8a;
+            margin-bottom: -2px;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
         }
         .input-group {
-            margin-bottom: 15px;
-            text-align: left;
+            margin-bottom: 18px;
         }
         .input-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 14px;
-            color: #555;
+            color: #475569;
+            font-weight: 500;
         }
         .input-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 15px;
+            transition: border-color 0.2s;
         }
-        .btn-group {
+        .input-group input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+        }
+        .row {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 15px;
         }
-        .auth-btn {
+        .row .input-group {
             flex: 1;
-            padding: 10px;
-            font-size: 14px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             border: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            border-radius: 6px;
+            background-color: #1e3a8a;
             color: white;
+            transition: background-color 0.2s;
+            margin-top: 10px;
         }
-        .login-btn {
-            background-color: #007bff;
+        .submit-btn:hover {
+            background-color: #152c6b;
         }
-        .login-btn:hover { background-color: #0056b3; }
-        
-        .signup-btn {
-            background-color: #28a745;
+        .submit-btn:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
         }
-        .signup-btn:hover { background-color: #1e7e34; }
-        
         #message {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 14px;
-            color: #d9534f; /* Default red for errors */
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
         }
+        .msg-error { background-color: #fee2e2; color: #b91c1c; display: block !important; }
+        .msg-success { background-color: #dcfce3; color: #15803d; display: block !important; }
+        .msg-warning { background-color: #fef9c3; color: #854d0e; display: block !important; }
     </style>
 </head>
 <body>
 
     <div class="auth-container">
-        <h2>Account Access</h2>
-        
-        <div class="input-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
+        <div class="tabs">
+            <div class="tab active" id="tab-login" onclick="switchTab('login')">Log In</div>
+            <div class="tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div>
         </div>
         
-        <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
+        <div id="form-login" class="form-section active">
+            <div class="input-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="button" id="loginBtn" class="submit-btn">Log In</button>
         </div>
 
-        <div class="btn-group">
-            <button type="button" id="loginBtn" class="auth-btn login-btn">Log In</button>
-            <button type="button" id="signupBtn" class="auth-btn signup-btn">Sign Up</button>
+        <div id="form-signup" class="form-section">
+            <div class="row">
+                <div class="input-group">
+                    <label for="signup-name">First Name</label>
+                    <input type="text" id="signup-name" placeholder="John" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-surname">Surname</label>
+                    <input type="text" id="signup-surname" placeholder="Doe" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" placeholder="you@example.com" required>
+            </div>
+            <div class="input-group">
+                <label for="signup-password">Create Password (Min 6 chars)</label>
+                <input type="password" id="signup-password" placeholder="Create a password" required>
+            </div>
+            <button type="button" id="signupBtn" class="submit-btn">Request Account</button>
         </div>
 
         <div id="message"></div>
     </div>
 
+    <script>
+        function switchTab(tab) {
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-signup').classList.remove('active');
+            document.getElementById('form-login').classList.remove('active');
+            document.getElementById('form-signup').classList.remove('active');
+            
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('form-' + tab).classList.add('active');
+            document.getElementById('message').style.display = 'none'; // clear messages on switch
+        }
+    </script>
+
     <script type="module">
-        // 1. Import Firebase core and auth functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-        import { 
-            getAuth, 
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword 
-        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+        // Import Firestore to handle the approval logic
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
-        // 2. PASTE YOUR FIREBASE CONFIG HERE
         const firebaseConfig = {
-  apiKey: "AIzaSyCuguX4R2Xa-Dl7Iavf9IZUhS4qAwMp6lA",
-  authDomain: "vivek-tanwar.firebaseapp.com",
-  projectId: "vivek-tanwar",
-  storageBucket: "vivek-tanwar.firebasestorage.app",
-  messagingSenderId: "108605442279",
-  appId: "1:108605442279:web:cd2ffc9e39eb951a757a42",
-  measurementId: "G-PK58ET19XQ"
-};
+            apiKey: "AIzaSyCuguX4R2Xa-Dl7Iavf9IZUhS4qAwMp6lA",
+            authDomain: "vivek-tanwar.firebaseapp.com",
+            projectId: "vivek-tanwar",
+            storageBucket: "vivek-tanwar.firebasestorage.app",
+            messagingSenderId: "108605442279",
+            appId: "1:108605442279:web:cd2ffc9e39eb951a757a42",
+            measurementId: "G-PK58ET19XQ"
+        };
 
-        // 3. Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // UI Elements
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-        const signupBtn = document.getElementById('signupBtn');
         const messageDiv = document.getElementById('message');
 
-        // Helper function to display messages
-        function showMessage(msg, isError = true) {
-            messageDiv.style.color = isError ? "#d9534f" : "#28a745";
+        function showMessage(msg, type) {
+            messageDiv.className = ''; // clear classes
+            messageDiv.classList.add('msg-' + type);
             messageDiv.textContent = msg;
         }
 
-        // 4. Sign Up Logic (Create new account)
-        signupBtn.addEventListener('click', () => {
-            const email = emailInput.value;
-            const password = passwordInput.value;
+        // SIGN UP LOGIC
+        document.getElementById('signupBtn').addEventListener('click', async () => {
+            const name = document.getElementById('signup-name').value;
+            const surname = document.getElementById('signup-surname').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const btn = document.getElementById('signupBtn');
 
-            if(!email || !password) {
-                return showMessage("Please enter both email and password.");
+            if(!name || !surname || !email || !password) {
+                return showMessage("Please fill in all fields.", "error");
             }
 
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    showMessage("Account created successfully! Welcome.", false);
-                    console.log("Signed up:", user);
-                    // window.location.href = "/dashboard.html"; // Redirect here
-                })
-                .catch((error) => {
-                    showMessage(error.message);
-                    console.error("Sign up error:", error.code, error.message);
+            btn.disabled = true;
+            btn.textContent = "Processing...";
+
+            try {
+                // 1. Create the user in Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Save their profile in Firestore with status 'pending'
+                await setDoc(doc(db, "users", user.uid), {
+                    firstName: name,
+                    lastName: surname,
+                    email: email,
+                    status: "pending", // Requires admin to change to 'approved'
+                    createdAt: new Date()
                 });
+
+                // 3. Immediately log them out so they can't access the site yet
+                await signOut(auth);
+
+                showMessage("Account request sent! You will be able to log in once the admin approves your request.", "success");
+                
+                // Clear form
+                document.getElementById('signup-name').value = '';
+                document.getElementById('signup-surname').value = '';
+                document.getElementById('signup-email').value = '';
+                document.getElementById('signup-password').value = '';
+
+            } catch (error) {
+                showMessage(error.message, "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Request Account";
+            }
         });
 
-        // 5. Log In Logic (Access existing account)
-        loginBtn.addEventListener('click', () => {
-            const email = emailInput.value;
-            const password = passwordInput.value;
+        // LOG IN LOGIC
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('loginBtn');
 
             if(!email || !password) {
-                return showMessage("Please enter both email and password.");
+                return showMessage("Please enter email and password.", "error");
             }
 
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    showMessage("Logged in successfully!", false);
-                    console.log("Logged in:", user);
-                    // window.location.href = "/dashboard.html"; // Redirect here
-                })
-                .catch((error) => {
-                    showMessage("Invalid email or password.");
-                    console.error("Login error:", error.code, error.message);
-                });
+            btn.disabled = true;
+            btn.textContent = "Logging in...";
+
+            try {
+                // 1. Log the user in
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Check their approval status in Firestore
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    
+                    if (userData.status === "approved") {
+                        // Success! Redirect to the main page
+                        showMessage("Login successful! Redirecting...", "success");
+                        // Redirecting to your root directory main page
+                        window.location.href = "../index.html"; 
+                    } else {
+                        // They are still pending
+                        await signOut(auth);
+                        showMessage("Your account is still pending admin approval. Please check back later.", "warning");
+                    }
+                } else {
+                    // Safety catch if doc doesn't exist
+                    await signOut(auth);
+                    showMessage("Account database record not found. Please contact the administrator.", "error");
+                }
+
+            } catch (error) {
+                showMessage("Invalid email or password.", "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Log In";
+            }
         });
     </script>
 </body>
