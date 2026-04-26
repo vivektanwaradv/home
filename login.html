@@ -274,8 +274,8 @@
                     if (userData.status === "approved") {
                         // Success! Redirect to the main page
                         showMessage("Login successful! Redirecting...", "success");
-                        // Redirecting to your root directory main page
-                        window.location.href = ".html"; 
+                        // Redirecting to your custom domain
+                        window.location.href = "https://vivektanwaradv.site"; 
                     } else {
                         // They are still pending
                         await signOut(auth);
