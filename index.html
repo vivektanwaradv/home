@@ -360,5 +360,54 @@
             });
         });
     </script>
+     <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+        // Initialize Firebase on the main page
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuguX4R2Xa-Dl7Iavf9IZUhS4qAwMp6lA",
+            authDomain: "vivek-tanwar.firebaseapp.com",
+            projectId: "vivek-tanwar",
+            storageBucket: "vivek-tanwar.firebasestorage.app",
+            messagingSenderId: "108605442279",
+            appId: "1:108605442279:web:cd2ffc9e39eb951a757a42"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Find the Desktop and Mobile button containers in the Navbar
+        // Note: You must add ids to the divs wrapping your login buttons in index.html 
+        // to make this target exactly right, but we will target the links directly by href for ease.
+
+        const loginLinks = document.querySelectorAll('a[href="https://vivektanwaradv.github.io/home/login.html"]');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is logged in. Change the buttons.
+                loginLinks.forEach(link => {
+                    // Turn the first link into a Logout button
+                    if(link.textContent.includes('Log In')) {
+                        link.textContent = 'Log Out';
+                        link.href = '#';
+                        link.classList.add('bg-red-50', 'text-red-600', 'border-red-600');
+                        link.classList.remove('text-primary', 'border-primary');
+                        
+                        // Add Logout functionality
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            signOut(auth).then(() => {
+                                window.location.reload(); // Reload page to reset UI
+                            });
+                        });
+                    }
+                    // Hide the Sign Up link since they are already logged in
+                    if(link.textContent.includes('Sign Up')) {
+                        link.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
