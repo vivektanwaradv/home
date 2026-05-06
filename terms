@@ -92,8 +92,8 @@
             <div class="flex flex-wrap justify-center gap-6">
                 <a href="index.html" class="hover:text-emerald-600 transition-colors">Home</a>
                 <a href="https://www.youtube.com" target="_blank" class="hover:text-emerald-600 transition-colors">YouTube</a>
-                <a href="Terms and condition.html" class="hover:text-emerald-600 transition-colors">Privacy Policy</a>
-                <a href="Terms and condition.html" class="text-emerald-600 font-semibold">Terms & Conditions</a>
+                <a href="terms.html" class="hover:text-emerald-600 transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="text-emerald-600 font-semibold">Terms & Conditions</a>
             </div>
         </div>
     </footer>
